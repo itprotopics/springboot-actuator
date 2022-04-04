@@ -19,12 +19,52 @@ Este módulo de Spring Boot permite monitorear y administrar aplicaciones en amb
 </dependency>
 ```
 
-### Subtitulo 1.1
+## Endpoints principales
 
-## Titulo 2
+| Endpoint | Usage |
+| ----------- | ----------- |  
+| /auditevents | Returns all auto-configuration candidates and the reason why they ‘were’ or ‘were not’ applied |
+| /beans | Returns a complete list of all the Spring beans in your application. |
+| /mappings | Displays a collated list of all @RequestMapping paths.. |
+| /env | Returns list of properties in current environment |
+| /health | Returns application health information. |
+| /caches | It exposes available caches. |
+| /loggers | The configuration of loggers in the application.. |
+| /shutdown | Lets the application be gracefully shutdown. Disabled by default. |
+| /metrics | It shows several useful metrics information like JVM memory used, system CPU usage, open files, and much more. |
+
+
+
+## Seguridad
+
 
 ```java
-    import clear 
+@Configuration
+public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
+	 
+	@Override
+    protected void configure(HttpSecurity http) throws Exception 
+    {
+        http
+         .csrf().disable()
+         .authorizeRequests().antMatchers("/msuser-manager/actuator").permitAll()
+		 .antMatchers("/msuser-manager/v1/**").authenticated()
+         .and()
+         .httpBasic();
+; 
+    }
+
+```
+
+## Habilitar y cambiar la ruta de los endpoints
+
+```yaml
+management:
+  endpoints:
+    web:
+      base-path: /msuser-manager/actuator
+      exposure:
+        include: health, info, env, beans, metrics, threaddump
 
 ```
 
