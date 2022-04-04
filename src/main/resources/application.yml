@@ -1,0 +1,76 @@
+# H2 properties
+spring:
+  datasource:
+    url: jdbc:h2:mem:jpa_jbd
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+# Enables H2 console
+  h2:
+    console:
+      enabled: true
+ 
+# custome H2 console url, Default is h2-console
+      path: /h2
+
+# webserver port mapping, default is 8080
+server:
+  port: 8080
+# custom root context, default is application name
+# server.servlet.context-path=/usermanager
+  error:
+    whitelabel:
+      enabled: false
+
+info: 
+  component: Microservicio para la administración de usuarios
+
+# management:
+#   endpoint:
+#     health:
+#       show-details: always
+#   security:
+#     enabled: 'false'
+#   health:
+#     # consul:
+#     #   enabled: 'false'
+#     db:
+#       enabled: 'true'
+#     defaults:
+#       enabled: 'false'
+  
+#   endpoints:
+#     health:
+#       sensitive: 'false'
+
+#     web:
+#       base-path: /msuser-manager/actuator
+
+management:
+  endpoints:
+    web:
+      base-path: /msuser-manager/actuator
+      exposure:
+        include: health, info, env, beans, metrics, threaddump
+  endpoint:
+    health:
+      show-details: always
+    security:
+      enabled: false
+  health:
+    defaults:
+      enabled: false
+    db:
+      enabled: true
+    ping:
+      enabled: true
+
+    
