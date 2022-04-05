@@ -145,3 +145,4 @@ management:
 - [Spring Boot Actuator](https://howtodoinjava.com/spring-boot/actuator-endpoints-example/)
 - [Enhancing Spring Boot Actuator with Custom Endpoints](https://medium.com/@jamiekee94/enhancing-spring-boot-actuator-with-custom-endpoints-d6343fbaa1ca)
 - [Custom Endpoint in Spring Boot Actuator](https://www.javadevjournal.com/spring-boot/spring-boot-actuator-custom-endpoint/)
+- [Part V. Spring Boot Actuator: Production-ready features](https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/production-ready-endpoints.html)
