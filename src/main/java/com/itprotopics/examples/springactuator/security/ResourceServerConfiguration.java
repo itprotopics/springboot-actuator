@@ -3,6 +3,9 @@ package com.itprotopics.examples.springactuator.security;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.itprotopics.examples.springactuator.actuator.GenericEndpointsActuator;
+import com.itprotopics.examples.springactuator.actuator.VigenciaActuator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -18,29 +21,26 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
-	 
+
 	@Override
-    protected void configure(HttpSecurity http) throws Exception 
-    {
-        http
-         .csrf().disable()
-         .authorizeRequests().antMatchers("/msuser-manager/actuator").permitAll()
-		 .antMatchers("/msuser-manager/v1/**").authenticated()
-         .and()
-         .httpBasic();
-; 
-    }
-  
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) 
-            throws Exception 
-    {
-        auth.inMemoryAuthentication()
-            .withUser("usermanager")
-            .password("{noop}1111xxxx2")
-            .roles("USER");
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+				.csrf().disable()
+				.authorizeRequests().antMatchers("/msuser-manager/actuator").permitAll()
+				.antMatchers("/msuser-manager/v1/**").authenticated()
+				.and()
+				.httpBasic();
+		;
 	}
 
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.inMemoryAuthentication()
+				.withUser("usermanager")
+				.password("{noop}1111xxxx2")
+				.roles("USER");
+	}
 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
@@ -60,11 +60,20 @@ public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
-				bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(
+				new CorsFilter(corsConfigurationSource()));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
 
-	
+	@Bean
+	public VigenciaActuator vigenciaActuator() {
+		return new VigenciaActuator();
+	}
+
+	@Bean
+	public GenericEndpointsActuator genericEndpointsActuator() {
+		return new GenericEndpointsActuator();
+	}
 
 }

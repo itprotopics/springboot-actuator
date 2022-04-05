@@ -31,7 +31,7 @@ server:
       enabled: false
 
 info: 
-  component: Microservicio para la administración de usuarios
+  component: Microservicio para la administración de usuarios VER23
 
 # management:
 #   endpoint:
@@ -59,7 +59,7 @@ management:
     web:
       base-path: /msuser-manager/actuator
       exposure:
-        include: health, info, env, beans, metrics, threaddump
+        include: health, info, env, beans, metrics, threaddump, vigencia, genericEndPoints
   endpoint:
     health:
       show-details: always
