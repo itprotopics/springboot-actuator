@@ -1,6 +1,24 @@
 # Demostración de Spring boot Actuator
 
 
+- [Demostración de Spring boot Actuator](#demostración-de-spring-boot-actuator)
+  - [Módulo de Spring Boot Actuator](#módulo-de-spring-boot-actuator)
+  - [Generar el proyecto en start.spring.io](#generar-el-proyecto-en-startspringio)
+  - [Dependencia de maven](#dependencia-de-maven)
+  - [Endpoints principales](#endpoints-principales)
+  - [Seguridad](#seguridad)
+  - [Habilitar y cambiar la ruta de los endpoints](#habilitar-y-cambiar-la-ruta-de-los-endpoints)
+  - [Mejorar Actuator con Endpoints personalizados](#mejorar-actuator-con-endpoints-personalizados)
+    - [Crear la clase con la lógica del Actuator](#crear-la-clase-con-la-lógica-del-actuator)
+    - [Configuración del Bean](#configuración-del-bean)
+    - [Incluir el endpoint en la configuración](#incluir-el-endpoint-en-la-configuración)
+    - [Incluir un método en la clase actuator](#incluir-un-método-en-la-clase-actuator)
+  - [Incluir información de Git](#incluir-información-de-git)
+    - [Agregar el plugin de git al pom del proyecto](#agregar-el-plugin-de-git-al-pom-del-proyecto)
+    - [Configurar el endpoint info](#configurar-el-endpoint-info)
+  - [Referencias:](#referencias)
+  
+
 ## Módulo de Spring Boot Actuator
 
 Actuator es un módulo de Spring Boot que permite monitorear y administrar aplicaciones en ambientes productivos sin necesidad de generar código específico para estas actividades. La información se expone vía REST en enpoints URLs.
@@ -114,7 +132,7 @@ management.endpoints.web.exposure.include=vigencia
 
 Para exponer un endpoint de Spring Actuator a una solicitud HTTP GET, necesitaremos anotar nuestro método con la anotación @ReadOperation.
 
-### Incluir información de Git
+## Incluir información de Git
 
 Una característica útil del endpoint  *info* es su capacidad para publicar información sobre el estado del repositorio de código fuente de git cuando se creó el proyecto. Si hay disponible un bean GitProperties, se exponen las propiedades git.branch, git.commit.id y git.commit.time.
 
