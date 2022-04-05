@@ -1,10 +1,9 @@
 # Demostración de Spring boot Actuator
 
-Demostración de Spring boot Actuator
 
 ## Módulo de Spring Boot Actuator
 
-Este módulo de Spring Boot permite monitorear y administrar aplicaciones en ambientes productivos sin necesidad de generar código específico para estas actividades. La información se expone vía REST en enpoints URLs.
+Actuator es un módulo de Spring Boot que permite monitorear y administrar aplicaciones en ambientes productivos sin necesidad de generar código específico para estas actividades. La información se expone vía REST en enpoints URLs.
 
 ## Generar el proyecto en [start.spring.io](https://start.spring.io/)
 
@@ -115,6 +114,31 @@ management.endpoints.web.exposure.include=vigencia
 
 Para exponer un endpoint de Spring Actuator a una solicitud HTTP GET, necesitaremos anotar nuestro método con la anotación @ReadOperation.
 
+### Incluir información de Git
+
+Una característica útil del endpoint  *info* es su capacidad para publicar información sobre el estado del repositorio de código fuente de git cuando se creó el proyecto. Si hay disponible un bean GitProperties, se exponen las propiedades git.branch, git.commit.id y git.commit.time.
+
+### Agregar el plugin de git al pom del proyecto
+
+```xml
+<build>
+	<plugins>
+		<plugin>
+			<groupId>pl.project13.maven</groupId>
+			<artifactId>git-commit-id-plugin</artifactId>
+		</plugin>
+	</plugins>
+</build>
+```
+
+### Configurar el endpoint info
+
+```yaml
+management:
+  info:
+    git:
+      mode: full
+```
 
 ## Referencias:
 

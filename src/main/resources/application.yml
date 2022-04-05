@@ -72,5 +72,7 @@ management:
       enabled: true
     ping:
       enabled: true
+  info:
+    git:
+      mode: full
 
-    
