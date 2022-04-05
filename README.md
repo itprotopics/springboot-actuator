@@ -68,7 +68,56 @@ management:
 
 ```
 
+## Mejorar Actuator con Endpoints personalizados
+
+En esta sección, veremos cómo podemos mejorar fácilmente Spring Boot Actuator agregando nuestros propios endpoints personalizados.
+
+### Crear la clase con la lógica del Actuator
+
+```java
+@Endpoint(id = "vigencia")
+public class VigenciaActuator {
+    
+    @ReadOperation
+    public String vigencia() {
+        return "IS UP";
+    }
+}
+```
+
+Se debe usar la anotación @Endpoint(id = "xxxx") para que Spring identifique a esta clase como parte de Actuator
+
+### Configuración del Bean
+
+En una clase de configuración se debe instanciar o generar un Bean de Spring para la clase anterior.
+
+```java
+@Bean
+public VigenciaActuator vigenciaActuator() {
+    return new VigenciaActuator();
+}
+```
+
+### Incluir el endpoint en la configuración
+
+```
+management.endpoints.web.exposure.include=vigencia
+```
+
+### Incluir un método en la clase actuator
+
+```java
+    @ReadOperation
+    public String vigencia() {
+        return "IS UP";
+    }
+```
+
+Para exponer un endpoint de Spring Actuator a una solicitud HTTP GET, necesitaremos anotar nuestro método con la anotación @ReadOperation.
+
 
 ## Referencias:
 
 - [Spring Boot Actuator](https://howtodoinjava.com/spring-boot/actuator-endpoints-example/)
+- [Enhancing Spring Boot Actuator with Custom Endpoints](https://medium.com/@jamiekee94/enhancing-spring-boot-actuator-with-custom-endpoints-d6343fbaa1ca)
+- [Custom Endpoint in Spring Boot Actuator](https://www.javadevjournal.com/spring-boot/spring-boot-actuator-custom-endpoint/)
